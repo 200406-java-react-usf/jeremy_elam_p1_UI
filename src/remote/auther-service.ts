@@ -1,8 +1,6 @@
-import axios from 'axios';
+import {projectOneClient} from './projectOne-client';
 
-export const projectOneClient = axios.create({
-	baseURL: 'http://http://project1api-env.eba-r6yaudsa.us-east-2.elasticbeanstalk.com',
-	headers: {
-		'Content-Type': 'application/json'
-	}
-})
+export async function authenticate(username: string, password: string){
+	let response = await projectOneClient.post('./auth',{username, password});
+	return await response.data;
+}
