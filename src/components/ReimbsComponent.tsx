@@ -37,7 +37,7 @@ function ReimbComponent(props: IReimbProps){
 	const [amount, setAmount] = useState(NaN);
 	const [description, setDescription] = useState('');
 	const [author_id, setAuthorId] = useState(NaN);
-	const [reimb_id, setReimbId] = useState(NaN);
+	const [reimb_type, setReimbType] = useState(NaN);
 	const [errorMessage, setErrorMessage] = useState('');
 
 	let newAmount = (e: any) =>{
@@ -53,18 +53,48 @@ function ReimbComponent(props: IReimbProps){
 	}
 
 	let newReimbId = (e: any) =>{
-		setReimbId(e.currentTarget.value);
+		setReimbType(e.currentTarget.value);
 	}
 
 	let reimb = async () =>{
-		if(amount === NaN || description === '' || author_id === NaN ||reimb_id === NaN){
+		if(amount === NaN || description === '' || author_id === NaN ||reimb_type === NaN){
 			setErrorMessage('All categories are required to submit a reimbursement')
 		}
 
-		let newReimbursement = await newReimb(amount, description, author_id,reimb_id )
+		let newReimbursement = await newReimb(amount, description, author_id,reimb_type )
 		props.setNewReimb(newReimbursement);
 		
 	}
 
+	return (
+		<>
+			<div className = {classes.reimbContainer}>
+				<form className = {classes.reimbForm}>
+					<Typography align = 'center' variant = 'h4'>Reimbursement</Typography>
 
+					<FormControl margin = 'normal' fullWidth>
+						<InputLabel htmlFor = 'amount'>Reimbursement Amount</InputLabel>
+						<Input
+							onChange = {newAmount}
+							value = {amount}
+							id = "amount" type = "number"
+							placeholder = "Reimbursement Amount" />
+					</FormControl>
+
+					<FormControl margin = 'normal' fullWidth>
+						<InputLabel htmlFor = 'description'>Description</InputLabel>
+						<Input
+							onChange = {newDescription}
+							value = {description}
+							id = "description" type = "text"
+							placeholder = "Description" />
+					</FormControl>
+
+				</form>
+			</div>
+		
+		</>
+	)
 }
+
+export default ReimbComponent;
