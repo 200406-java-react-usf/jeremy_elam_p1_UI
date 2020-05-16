@@ -1,26 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+
+import LoginComponent from './components/LoginComponent';
+
+import {Users} from './models/users';
+import { AppBar, Toolbar, Typography, createMuiTheme, ThemeProvider } from '@material-ui/core';
+
 import logo from './logo.svg';
 import './App.css';
+import RegisterComponent from './components/RegisterComponent';
 
-function App() {
+function App(){
+
+  //@ts-ignore
+  const [authUser, setAuthUser] = useState(null as User);
+  //@ts-ignore
+  const [newUser, setNewUser] = useState(null as User);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Router>
+        <Switch>
+          <Route path="/login" render={() => <LoginComponent authUser={authUser} setAuthUser={setAuthUser} />} />
+          <Route path = "/register" render = {() =><RegisterComponent newUser = {newUser} setNewUser = {setNewUser}/>}/>
+        </Switch>
+      </Router>
+    </>
+  )
 }
 
 export default App;
