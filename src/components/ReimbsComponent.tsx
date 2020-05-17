@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Redirect} from 'react-router-dom';
 import {Alert} from '@material-ui/lab'
 
 import { 
@@ -14,6 +15,7 @@ import {Reimbursements} from '../models/reimbs';
 import {newReimb} from '../remote/reimb-service';
 
 interface IReimbProps{
+	username: string
 	newReimb: Reimbursements;
 	setNewReimb: (reimb: Reimbursements) => void;
 }
@@ -52,7 +54,7 @@ function ReimbComponent(props: IReimbProps){
 		setAuthorId(e.currentTarget.value);
 	}
 
-	let newReimbId = (e: any) =>{
+	let newReimbType = (e: any) =>{
 		setReimbType(e.currentTarget.value);
 	}
 
@@ -67,11 +69,12 @@ function ReimbComponent(props: IReimbProps){
 	}
 
 	return (
+		!props.username ? 
+		<Redirect to = "/login" /> :
 		<>
 			<div className = {classes.reimbContainer}>
 				<form className = {classes.reimbForm}>
 					<Typography align = 'center' variant = 'h4'>Reimbursement</Typography>
-
 					<FormControl margin = 'normal' fullWidth>
 						<InputLabel htmlFor = 'amount'>Reimbursement Amount</InputLabel>
 						<Input
@@ -80,7 +83,6 @@ function ReimbComponent(props: IReimbProps){
 							id = "amount" type = "number"
 							placeholder = "Reimbursement Amount" />
 					</FormControl>
-
 					<FormControl margin = 'normal' fullWidth>
 						<InputLabel htmlFor = 'description'>Description</InputLabel>
 						<Input
@@ -89,7 +91,34 @@ function ReimbComponent(props: IReimbProps){
 							id = "description" type = "text"
 							placeholder = "Description" />
 					</FormControl>
-
+					<FormControl margin = 'normal' fullWidth>
+						<label> Select the Type of Reimbursement:
+						<select onChange = {newReimbType} value = {reimb_type} >
+							<option >Select a Type</option>
+							<option value = 'lodging'>lodging</option>
+							<option value = 'travel'>travel</option>
+							<option value = 'food'>food</option>
+							<option value = 'other'>other</option>
+						</select>
+						</label>
+					</FormControl>  
+					<FormControl margin = 'normal' fullWidth>
+						<InputLabel htmlFor = 'authorID'> Your ID Number </InputLabel>
+						<Input
+							onChange = {newAuthorId}
+							value = {author_id}
+							id = "authorId" type = "number" 
+							placeholder = "Enter your Id"/>
+					</FormControl>
+					<br></br>
+					<Button onClick = {reimb} variant = "contained" color = "secondary" size = "medium">Submit Reimbursement</Button>
+					<br></br>
+					{
+					errorMessage ?
+					<span style = {{color: 'red'}}>{errorMessage}</span>
+					:
+					<></>
+					}
 				</form>
 			</div>
 		
