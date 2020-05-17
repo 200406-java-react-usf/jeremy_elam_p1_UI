@@ -39,6 +39,7 @@ function RegisterComponent(props: IRegisterProps){
 	const [first_name, setFirstName] = useState('');
 	const [last_name, setLastName] = useState('');
 	const [email, setEmail] = useState('');
+	const [role_name, setRoleName] = useState('')
 	const [errorMessage, setErrorMessage] = useState('');
 
 	let newUsername = (e: any) =>{
@@ -56,11 +57,14 @@ function RegisterComponent(props: IRegisterProps){
 	let newEmail = (e: any) =>{
 		setEmail(e.currentTarget.value);
 	}
+	let newRoleName = (e: any) =>{
+		setRoleName(e.currentTarget.value);
+	}
 	let register = async () =>{
-		if(username === '' || password === '' || first_name === '' || last_name === '' || email === ''){
+		if(role_name === ''|| username === '' || password === '' || first_name === '' || last_name === '' || email === ''){
 			setErrorMessage('All areas must be filled in.')
 		}
-		let newUser = await registerUser(first_name, last_name, username, email, password);
+		let newUser = await registerUser(first_name, last_name, username, email, password, role_name);
 		props.setNewUser(newUser);
 	}
 
@@ -114,6 +118,16 @@ function RegisterComponent(props: IRegisterProps){
 							id = "password" type = "password" 
 							placeholder = "Enter your First Name"/>
 					</FormControl>
+					<FormControl margin = 'normal' fullWidth>
+						<label> Select the Type of Reimbursement:
+						<select onChange = {newRoleName} value = {role_name} >
+							<option >Select a Type</option>
+							<option value = 'admin'>Admin</option>
+							<option value = 'finance'>Finance Manager</option>
+							<option value = 'employee'>Employee</option>
+						</select>
+						</label>
+					</FormControl>  
 					<br></br>
 					<Button onClick = {register} variant = "contained" color = "secondary" size = "medium">Register</Button>
 					<br></br>
