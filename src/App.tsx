@@ -8,16 +8,17 @@ import {Reimbursements} from './models/reimbs';
 
 import LoginComponent from './components/LoginComponent';
 import RegisterComponent from './components/RegisterComponent';
-import ReimbComponent from './components/ReimbsComponent';
+import ReimbComponent from './components/NewReimbsComponent';
 import HomeComponent from './components/HomeComponent';
 import NavbarComponent from './components/NavbarComponent';
-import UserComponent from './components/UserComponent'
+import UserComponent from './components/AllUserComponent'
 
 
 
 import logo from './logo.svg';
 import './App.css';
 import UpdateUserComponent from './components/UpdateUserComponent';
+import AllReimbComponent from './components/AllReimbComponent';
 
 function App(){
 
@@ -29,6 +30,7 @@ function App(){
   const [updateUser, setUpdateUser] = useState(null as Users);
   //@ts-ignore
   const [newReimb, setNewReimb] = useState(null as Reimbursements);
+  
 
   return (
     <>
@@ -49,6 +51,7 @@ function App(){
           <Route path = "/register" render = {() =><RegisterComponent newUser = {newUser} setNewUser = {setNewUser}/>}/>
           <Route path = "/users" render = {() => <UserComponent authUser = {authUser}/>}/>
           <Route path = "/user/update" render = {() =><UpdateUserComponent updateUser = {updateUser} setUpdateUser = {setUpdateUser}/>}/>
+          <Route path = "/reimb/all" render = {() => <AllReimbComponent authUser = {authUser} allReimb = {newReimb} />}/>
           <Route path = "/reimb" render = {()=><ReimbComponent username = {authUser?.username} newReimb = {newReimb} setNewReimb = {setNewReimb}/>} />
         </Switch>
       </Router>
