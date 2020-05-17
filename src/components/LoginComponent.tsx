@@ -41,23 +41,29 @@ function LoginComponent(props: ILoginProps){
 
 	let updateUsername = (e: any) =>{
 		setUsername(e.currentTarget.value);
+
+		
 	}
 
 	let updatePassword = (e:any) =>{
 		setPassword(e.currentTarget.value);
+
 	}
+	
 
 	let login = async ()=>{
 		if(username === '' || password === ''){
 			setErrorMessage('Both username and password must be entered to login.')
 		}
+		
 		let authUser = await authenticate(username, password);
 		props.setAuthUser(authUser);
+		console.log(props.authUser);
 	}
 
 	return (
-		// props.authUser ? 
-		// <Redirect to="/home" /> :
+		props.authUser ? 
+		<Redirect to="/home" /> :
 		<>
 			{/* ask question about this later to kennedy */}
 			<div className = {classes.loginContainer}>
