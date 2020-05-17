@@ -52,6 +52,9 @@ const NavBarComponent = (props: INavbarProps)=>{
 							<Typography>
 								<Link to = "/users" color = "inherit" className = {classes.menuButton}> testing</Link>
 							</Typography>
+							<Typography>
+								<Link to = "/reimb/all" color = "inherit" className = {classes.menuButton}> All Reimbursement</Link>
+							</Typography>
 							
 							<Typography>
 								<Link to = "/user/update" color = "inherit" className = {classes.menuButton}> Update User</Link>
