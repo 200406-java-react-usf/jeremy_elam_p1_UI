@@ -7,9 +7,7 @@ interface IUserProp{
 }
 
 
-const UserComponent = (props: IUserProp) =>{
-	console.log(props.authUser);
-	
+const UserComponent = (props: IUserProp) =>{	
 	const [usersState, setUsersState] = useState([] as Users[]);
 
 	let users: any[] = [];
@@ -26,21 +24,19 @@ const UserComponent = (props: IUserProp) =>{
 						<td>{user.last_name}</td>
 						<td>{user.username}</td>
 						<td>{user.email}</td>
-						
-						
 						{
 							user.role_name === 'admin'?
-							<td>admin</td>
+							<td>Admin</td>
 							:
 							user.role_name === 'finance' ?
 							<td>Financial Manager</td>
 							:
-							<td>employee</td>
+							<td>Employee</td>
 						}
 					</tr>
 				)
 			}
-			setUsersState(users)
+			setUsersState(users);
 		}
 		fetchData();
 	},[]);
@@ -48,7 +44,7 @@ const UserComponent = (props: IUserProp) =>{
 	return (
 		!props.authUser || (props.authUser.role_name !== 'admin') ?
 		<>
-			<h1>YOu're not authorized to view this page</h1>
+			<h1>You're not authorized to view this page</h1>
 		</>
 
 		:
@@ -56,7 +52,6 @@ const UserComponent = (props: IUserProp) =>{
 			<h1>User Component</h1>
             
             <table>
-
                 <thead>
                     <tr>
                         <th>Id</th>
