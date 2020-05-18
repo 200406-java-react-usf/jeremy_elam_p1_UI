@@ -2,7 +2,7 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import {Button} from '@material-ui/core';
 import {getUsers} from '../remote/user-service';
-import {allReimb} from '../remote/reimb-service'
+import {allReimb, pendingReimb} from '../remote/reimb-service'
 import {logout} from '../remote/auth-service';
 import { Users } from '../models/users';
 import UserComponent from './AllUserComponent'
@@ -31,7 +31,7 @@ const HomeComponent = (props: IHomeProps) =>{
 			<br/>
 			<Button onClick = {logout} variant = "contained" color = "primary" size = "medium"> Logout</Button>
 			<br/>
-			<Button onClick = {allReimb} variant = "contained" color = "secondary" size = "small"> Get All Reimb Stuff</Button>
+			<Button onClick = {pendingReimb} variant = "contained" color = "secondary" size = "small"> Get All Reimb Stuff</Button>
 		</>
 	)
 }
