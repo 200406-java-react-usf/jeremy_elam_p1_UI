@@ -52,7 +52,6 @@ const UserComponent = (props: IUserProp) =>{
 			<h1>User Component</h1>
             
             <table>
-
                 <thead>
                     <tr>
                         <th>Id</th>
