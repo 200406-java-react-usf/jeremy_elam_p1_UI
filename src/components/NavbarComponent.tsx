@@ -1,18 +1,24 @@
 import React, {useState} from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import {Link} from 'react-router-dom';
 import {
 	AppBar,
 	Toolbar,
 	IconButton,
-	Typography
+	Typography,
+	ListItem,
+	Theme,
+	createStyles,
+	makeStyles,
+	List,
+	ListItemText
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import {Users} from '../models/users';
+import { projectOneClient } from '../remote/projectOne-client';
 
 
 interface INavbarProps{
 	authUser: Users;
+	setAuthUser: (user: Users) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -36,40 +42,112 @@ const useStyles = makeStyles((theme: Theme) =>
 const NavBarComponent = (props: INavbarProps)=>{
 
 	const classes = useStyles();
+
+    async function logout(){
+
+        await projectOneClient.get('/auth');
+        //@ts-ignore
+        props.setAuthUser(null as User);
+	}
 	return (
 		<>
-				<AppBar position="fixed">
-					<Toolbar>
-						<IconButton edge = "start" className={classes.menuButton} color = "inherit" aria-lable = "menu">
-							ERS
-						</IconButton>
-							<Typography color = "inherit" variant = "h6" className = {classes.title}>
-								<Link to = "/home" color = "inherit" className = {classes.title}> Home </Link>
+			<List component = "nav">
+				<ListItem component = "div">
+					<Typography color = "inherit" variant = "h5">ERS</Typography>
+					{
+						!props.authUser ? 
+						<ListItemText inset>
+							<Typography color = "inherit" variant = "h6">
+								<Link to = "/login" className = {classes.link} >Login</Link>
 							</Typography>
-							<Typography>
-								<Link to = "/reimb" color = "inherit" className = {classes.menuButton}> Reimbursement</Link>
-							</Typography>
-							<Typography>
-								<Link to = "/users" color = "inherit" className = {classes.menuButton}> testing</Link>
-							</Typography>
-							<Typography>
-								<Link to = "/reimb/all" color = "inherit" className = {classes.menuButton}> All Reimbursement</Link>
-							</Typography>
+						</ListItemText>
+
+						:
+						props.authUser.role_name === 'admin' ?
+							<>
+								<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/home" className = {classes.link}>Home</Link>
+									</Typography>
+								</ListItemText>
+
+								<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/register" className = {classes.link}>Register New User</Link>
+									</Typography>
+								</ListItemText>
+
+								<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/users" className = {classes.link}>All Users</Link>
+									</Typography>
+								</ListItemText>
+
+								<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/user/update" className = {classes.link}>Update User</Link>
+									</Typography>
+								</ListItemText>
+
+								<ListItemText inset>
+                                    <Typography color = "inherit" variant = "h6">
+                                        <Link to = '' onClick = {logout} className = {classes.menuButton}>Logout</Link>
+                                    </Typography>
+                                </ListItemText> 
+							</>
+						:
+						props.authUser.role_name === 'finance' ?
+							<>
+								<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/home" className = {classes.link}>Home</Link>
+									</Typography>
+								</ListItemText>
+
+								<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/reimb/all" className = {classes.link}>View All Reimbursements</Link>
+									</Typography>
+								</ListItemText>
+
+
+								<ListItemText inset>
+                                    <Typography color = "inherit" variant = "h6">
+                                        <Link to = '' onClick = {logout} className = {classes.link}>Logout</Link>
+                                    </Typography>
+                                </ListItemText> 
+							</>
+							:
+							<>
+							<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/home" className = {classes.link}>Home</Link>
+									</Typography>
+							</ListItemText>
+
+							<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/home" className = {classes.link}>Home</Link>
+									</Typography>
+							</ListItemText>
+
+							<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/reimb" className = {classes.link}>New Reimbursement</Link>
+									</Typography>
+							</ListItemText>
+
+							<ListItemText inset>
+                                    <Typography color = "inherit" variant = "h6">
+                                        <Link to = '' onClick = {logout} className = {classes.link}>Logout</Link>
+                                    </Typography>
+                                </ListItemText> 
+							</>
+ 
 							
-							<Typography>
-								<Link to = "/user/update" color = "inherit" className = {classes.menuButton}> Update User</Link>
-							</Typography>
-							<Typography>
-								<Link to="/login" color="inherit" className = {classes.link}>LOGIN </Link>
-							</Typography>
-							<Typography>
-								<text> / </text>
-							</Typography>
-							<Typography>
-								<Link to="/register" color="inherit" className = {classes.link}>REGISTER</Link>
-							</Typography>
-					</Toolbar>
-				</AppBar>
+					}
+				</ListItem>
+			</List>
 		</>
 		
 	)
