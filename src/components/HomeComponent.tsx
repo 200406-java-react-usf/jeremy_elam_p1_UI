@@ -4,19 +4,26 @@ import {Button} from '@material-ui/core';
 import {getUsers} from '../remote/user-service';
 import {allReimb} from '../remote/reimb-service'
 import {logout} from '../remote/auth-service';
+import { Users } from '../models/users';
+import UserComponent from './AllUserComponent'
 
 interface IHomeProps{
-	username: string;
+	authUser: Users;
 }
 
+
+
 const HomeComponent = (props: IHomeProps) =>{
+	console.log(props.authUser);
+	
 	return (
-		!props.username ?
+		!props.authUser ?
 		<Redirect to = "/login" /> :
 		<>	
 			<br></br>
 			<br/>
-			<h1>Welcome, {props.username}! </h1>
+			<h1>Welcome, {props.authUser.username}! </h1>
+			<h2>User ID: {props.authUser.ers_user_id}</h2>
 			
 
 			<br/>
