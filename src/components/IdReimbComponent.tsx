@@ -1,22 +1,21 @@
-import React, {useEffect, useState} from 'react'; 
+import React, {useState, useEffect} from 'react';
 import {Reimbursements} from '../models/reimbs';
-import {allReimb} from '../remote/reimb-service';
-import { Users } from '../models/users';
-
+import {Users} from '../models/users';
+import { getIdReimb } from '../remote/reimb-service';
 
 interface IReimbProp{
 	allReimb: Reimbursements;
 	authUser: Users;
 }
-
-const AllReimbComponent = (props: IReimbProp) =>{
+const ReimbIdComponent = (props: IReimbProp) =>{
 	const [reimbState, setReimbState] = useState([] as Reimbursements[]);
-
+	const users = props.authUser.ers_user_id
 	let reimbs: any[] = [];
 
-	useEffect(()=>{
+	useEffect(() =>{
 		let fetchData = async() =>{
-			const response = await allReimb();
+			//@ts-ignore
+			const response = await getIdReimb(users);
 
 			for(let reimb of response){
 				reimbs.push(
@@ -37,9 +36,8 @@ const AllReimbComponent = (props: IReimbProp) =>{
 		}
 		fetchData();
 	},[]);
-
 	return (
-		!props.authUser || (props.authUser.role_name !== 'finance') ?
+		!props.authUser || (props.authUser.role_name !== 'employee') ?
 		<>
 			<h1>You're not authorized to view this page</h1>
 		</>
@@ -68,6 +66,7 @@ const AllReimbComponent = (props: IReimbProp) =>{
 			</table>
 		</>
 	);
+
 }
 
-export default AllReimbComponent;
+export default ReimbIdComponent;

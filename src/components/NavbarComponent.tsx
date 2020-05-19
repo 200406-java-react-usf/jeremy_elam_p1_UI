@@ -106,10 +106,32 @@ const NavBarComponent = (props: INavbarProps)=>{
 
 								<ListItemText inset>
 									<Typography color = "inherit" variant = "h6">
-										<Link to = "/reimb/all" className = {classes.link}>View All Reimbursements</Link>
+										<Link to = "/reimb/all" className = {classes.link}>All Reimbursements</Link>
 									</Typography>
 								</ListItemText>
-
+								
+								<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/reimb/status/approved" className = {classes.link}>Approved Reimbursements</Link>
+									</Typography>
+								</ListItemText>
+								<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/reimb/status/denied" className = {classes.link}>Denied Reimbursements</Link>
+									</Typography>
+								</ListItemText>
+								<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/reimb/status/pending" className = {classes.link}>Pending Reimbursements</Link>
+									</Typography>
+								</ListItemText>
+								<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/reimb/status/change" className = {classes.link}>Approve or Deny Reimbursement</Link>
+									</Typography>
+								</ListItemText>
+								
+								
 
 								<ListItemText inset>
                                     <Typography color = "inherit" variant = "h6">
@@ -127,13 +149,12 @@ const NavBarComponent = (props: INavbarProps)=>{
 
 							<ListItemText inset>
 									<Typography color = "inherit" variant = "h6">
-										<Link to = "/home" className = {classes.link}>Home</Link>
+										<Link to = "/reimb" className = {classes.link}>New Reimbursement</Link>
 									</Typography>
 							</ListItemText>
-
 							<ListItemText inset>
 									<Typography color = "inherit" variant = "h6">
-										<Link to = "/reimb" className = {classes.link}>New Reimbursement</Link>
+										<Link to = "/reimb/id" className = {classes.link}>My Reimbursements</Link>
 									</Typography>
 							</ListItemText>
 

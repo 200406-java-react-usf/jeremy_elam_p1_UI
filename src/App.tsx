@@ -8,14 +8,19 @@ import {Reimbursements} from './models/reimbs';
 import LoginComponent from './components/LoginComponent';
 import RegisterComponent from './components/RegisterComponent';
 import ReimbComponent from './components/NewReimbsComponent';
+import PendingReimbComponent from './components/PendingReimbComponent'
+import ApprovedReimbComponent from './components/ApprovedReimbComponent'
 import HomeComponent from './components/HomeComponent';
 import NavbarComponent from './components/NavbarComponent';
 import UserComponent from './components/AllUserComponent'
-
-import logo from './logo.svg';
-import './App.css';
 import UpdateUserComponent from './components/UpdateUserComponent';
 import AllReimbComponent from './components/AllReimbComponent';
+import DeniedReimbComponent from './components/DeniedReimbComponent';
+import ChangeStatusReimbComponent from './components/ChangeStatusReimbComponent';
+import logo from './logo.svg';
+import './App.css';
+import ReimbIdComponent from './components/IdReimbComponent';
+
 
 function App(){
 
@@ -49,7 +54,12 @@ function App(){
           <Route path = "/users" render = {() => <UserComponent authUser = {authUser}/>}/>
           <Route path = "/user/update" render = {() =><UpdateUserComponent updateUser = {updateUser} setUpdateUser = {setUpdateUser}/>}/>
           <Route path = "/reimb/all" render = {() => <AllReimbComponent authUser = {authUser} allReimb = {newReimb} />}/>
-          <Route path = "/reimb" render = {()=><ReimbComponent username = {authUser?.username} newReimb = {newReimb} setNewReimb = {setNewReimb}/>} /> 
+          <Route path = "/reimb/id" render = {() => <ReimbIdComponent authUser = {authUser} allReimb = {newReimb} />}/>
+          <Route path = "/reimb/status/pending" render = {() => <PendingReimbComponent authUser = {authUser} allReimb = {newReimb}  />}/>
+          <Route path = "/reimb/status/approved" render = {() => <ApprovedReimbComponent authUser = {authUser} allReimb = {newReimb}  />}/>
+          <Route path = "/reimb/status/denied" render = {() => <DeniedReimbComponent authUser = {authUser} allReimb = {newReimb}  />}/>
+          <Route path = "/reimb/status/change" render = {() => <ChangeStatusReimbComponent authUser = {authUser} newReimb = {newReimb} setNewReimb = {setNewReimb}/>}/>
+          <Route path = "/reimb" render = {()=><ReimbComponent authUser = {authUser} newReimb = {newReimb} setNewReimb = {setNewReimb}/>} /> 
         </Switch>
       </Router>
     </>

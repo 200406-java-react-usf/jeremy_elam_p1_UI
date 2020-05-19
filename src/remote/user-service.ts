@@ -19,3 +19,13 @@ export async function updateUser(ers_user_id: number,username:string, password: 
 	return await response.data;
 
 }
+
+export async function getIdUser(id: number){
+	let response = await projectOneClient.get(`/users/${id}`);
+	return await response.data;
+}
+
+// export async function deleteUser(id: number){
+// 	let response = await projectOneClient.delete(`/users`,{ers_user_id:id});
+// 	return await response.data;
+// }

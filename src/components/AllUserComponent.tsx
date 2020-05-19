@@ -9,9 +9,10 @@ interface IUserProp{
 
 const UserComponent = (props: IUserProp) =>{	
 	const [usersState, setUsersState] = useState([] as Users[]);
-
+	console.log(props.authUser);
+	
 	let users: any[] = [];
-
+	
 	useEffect(()=>{
 		let fetchData = async() =>{
 			const response = await getUsers();

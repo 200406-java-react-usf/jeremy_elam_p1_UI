@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'; 
 import {Reimbursements} from '../models/reimbs';
-import {allReimb} from '../remote/reimb-service';
+import {pendingReimb} from '../remote/reimb-service';
 import { Users } from '../models/users';
 
 
@@ -16,7 +16,7 @@ const AllReimbComponent = (props: IReimbProp) =>{
 
 	useEffect(()=>{
 		let fetchData = async() =>{
-			const response = await allReimb();
+			const response = await pendingReimb();
 
 			for(let reimb of response){
 				reimbs.push(
@@ -41,7 +41,7 @@ const AllReimbComponent = (props: IReimbProp) =>{
 	return (
 		!props.authUser || (props.authUser.role_name !== 'finance') ?
 		<>
-			<h1>You're not authorized to view this page</h1>
+			<h1>YOu're not authorized to view this page</h1>
 		</>
 
 		:
