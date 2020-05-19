@@ -34,3 +34,8 @@ export async function deniedReimb(){
 	console.log(response.data);
 	return await response.data
 }
+
+export async function getIdReimb(id: number){
+	let response = await projectOneClient.get(`/reimb/user/${id}`);
+	return await response.data;
+}
