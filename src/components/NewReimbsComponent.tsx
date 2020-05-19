@@ -13,9 +13,10 @@ import {
 
 import {Reimbursements} from '../models/reimbs';
 import {newReimb} from '../remote/reimb-service';
+import { Users } from '../models/users';
 
 interface IReimbProps{
-	username: string
+	authUser: Users;
 	newReimb: Reimbursements;
 	setNewReimb: (reimb: Reimbursements) => void;
 }
@@ -63,13 +64,14 @@ function ReimbComponent(props: IReimbProps){
 			setErrorMessage('All categories are required to submit a reimbursement')
 		}
 
-		let newReimbursement = await newReimb(amount, description, author_id,reimb_type )
+		//@ts-ignore
+		let newReimbursement = await newReimb(amount, description, props.authUser.ers_user_id,reimb_type )
 		props.setNewReimb(newReimbursement);
 		
 	}
 
 	return (
-		!props.username ? 
+		!props.authUser.username ? 
 		<Redirect to = "/login" /> :
 		<>
 			<div className = {classes.reimbContainer}>
@@ -102,14 +104,7 @@ function ReimbComponent(props: IReimbProps){
 						</select>
 						</label>
 					</FormControl>  
-					<FormControl margin = 'normal' fullWidth>
-						<InputLabel htmlFor = 'authorID'> Your ID Number </InputLabel>
-						<Input
-							onChange = {newAuthorId}
-							value = {author_id}
-							id = "authorId" type = "number" 
-							placeholder = "Enter your Id"/>
-					</FormControl>
+					
 					<br></br>
 					<Button onClick = {reimb} variant = "contained" color = "secondary" size = "medium">Submit Reimbursement</Button>
 					<br></br>
