@@ -152,6 +152,11 @@ const NavBarComponent = (props: INavbarProps)=>{
 										<Link to = "/reimb" className = {classes.link}>New Reimbursement</Link>
 									</Typography>
 							</ListItemText>
+							<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										<Link to = "/reimb/id" className = {classes.link}>My Reimbursements</Link>
+									</Typography>
+							</ListItemText>
 
 							<ListItemText inset>
                                     <Typography color = "inherit" variant = "h6">
