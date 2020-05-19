@@ -41,7 +41,7 @@ const AllReimbComponent = (props: IReimbProp) =>{
 	return (
 		!props.authUser || (props.authUser.role_name !== 'finance') ?
 		<>
-			<h1>YOu're not authorized to view this page</h1>
+			<h1>You're not authorized to view this page</h1>
 		</>
 
 		:
