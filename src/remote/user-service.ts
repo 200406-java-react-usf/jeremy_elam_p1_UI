@@ -4,13 +4,11 @@ import { logout } from './auth-service';
 
 export async function getUsers(){
 	let response = await projectOneClient.get('/users');
-	console.log(response.data)
 	return await response.data;
 }
 
 export async function getByRole(role:string){
 	let response = await projectOneClient.get(`/users/role/${role}`);
-	console.log(response.data);
 	return await response.data;
 }
 
@@ -25,7 +23,7 @@ export async function getIdUser(id: number){
 	return await response.data;
 }
 
-// export async function deleteUser(id: number){
-// 	let response = await projectOneClient.delete(`/users`,{ers_user_id:id});
-// 	return await response.data;
-// }
+export async function deleteUser(id: number){
+	let response = await projectOneClient.delete(`/users`,{data: {ers_user_id:id}});
+	return await response.data;
+}
