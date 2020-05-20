@@ -1,12 +1,12 @@
 export class Users{
-	ers_user_id: number | null;
+	ers_user_id: number ;
 	username: string;
 	password: string;
 	first_name: string;
 	last_name: string;
 	email: string;
-	role_name: string | null;
-	constructor(user_id: number | null, un: string, pw: string, fn: string, ln: string, email: string, role_name: string){
+	role_name: string;
+	constructor(user_id: number, un: string, pw: string, fn: string, ln: string, email: string, role_name: string){
 		this.ers_user_id = user_id;
 		this.username = un;
 		this.password = pw;
