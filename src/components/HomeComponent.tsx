@@ -14,8 +14,6 @@ interface IHomeProps{
 
 
 const HomeComponent = (props: IHomeProps) =>{
-	console.log(props.authUser);
-	
 	return (
 		!props.authUser ?
 		<Redirect to = "/login" /> :
