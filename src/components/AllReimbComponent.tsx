@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react'; 
 import {Reimbursements} from '../models/reimbs';
-import {allReimb} from '../remote/reimb-service';
+import {allReimb,getReimbByReimbID} from '../remote/reimb-service';
 import { Users } from '../models/users';
+import { Link } from 'react-router-dom';
 
 
 interface IReimbProp{
-	allReimb: Reimbursements;
 	authUser: Users;
+	setThisReimb: (reimb: Reimbursements) => void
 }
 
 const AllReimbComponent = (props: IReimbProp) =>{
@@ -30,6 +31,12 @@ const AllReimbComponent = (props: IReimbProp) =>{
 						<td>{reimb.resolver_id}</td>
 						<td>{reimb.reimb_status}</td>
 						<td>{reimb.reimb_type}</td>
+						<td><Link to = {`/details-${reimb.reimb_id}`} onClick = {
+                                async () => {
+									const response = await getReimbByReimbID(reimb.reimb_id);
+								props.setThisReimb(response);
+                                }
+                            }>Details</Link></td>
 					</tr>
 				)
 			}
@@ -43,9 +50,7 @@ const AllReimbComponent = (props: IReimbProp) =>{
 		<>
 			<h1>You're not authorized to view this page</h1>
 		</>
-
 		:
-
 		<>
 			<h1>Reimbursement Component</h1>
 			<table>
