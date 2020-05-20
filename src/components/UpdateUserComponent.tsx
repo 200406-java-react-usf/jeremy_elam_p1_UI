@@ -68,7 +68,6 @@ function UpdateUserComponent(props: IUpdateProps){
 		if(id === NaN || role_name === '' || username === '' || password === '' || first_name === '' || last_name === '' || email === ''){
 			setErrorMessage('All areas must be filled in.')
 		}
-
 		let updatedUser = await updateUser(id, username, password, first_name, last_name, email, role_name);
 		props.setUpdateUser(updatedUser);
 	}

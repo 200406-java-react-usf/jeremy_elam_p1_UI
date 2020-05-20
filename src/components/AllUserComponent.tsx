@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react'; 
 import {Users} from '../models/users';
 import {getUsers} from '../remote/user-service';
+import { Link } from 'react-router-dom';
 
 interface IUserProp{
 	authUser: Users;
+	setNewUser: (user: Users) => void;
 }
 
 
 const UserComponent = (props: IUserProp) =>{	
 	const [usersState, setUsersState] = useState([] as Users[]);
-	console.log(props.authUser);
-	
+
 	let users: any[] = [];
 	
 	useEffect(()=>{
@@ -34,6 +35,12 @@ const UserComponent = (props: IUserProp) =>{
 							:
 							<td>Employee</td>
 						}
+						<td><Link to={'/user/update'} onClick={ () => {
+                            props.setNewUser({...user})}}>edit</Link>
+                        </td>
+                        <td><Link to={'/users/delete'} onClick={ () => {
+                            props.setNewUser({...user})}}>delete</Link>
+                        </td>
 					</tr>
 				)
 			}

@@ -84,12 +84,6 @@ const NavBarComponent = (props: INavbarProps)=>{
 								</ListItemText>
 
 								<ListItemText inset>
-									<Typography color = "inherit" variant = "h6">
-										<Link to = "/user/update" className = {classes.link}>Update User</Link>
-									</Typography>
-								</ListItemText>
-
-								<ListItemText inset>
                                     <Typography color = "inherit" variant = "h6">
                                         <Link to = '' onClick = {logout} className = {classes.menuButton}>Logout</Link>
                                     </Typography>
@@ -125,14 +119,8 @@ const NavBarComponent = (props: INavbarProps)=>{
 										<Link to = "/reimb/status/pending" className = {classes.link}>Pending Reimbursements</Link>
 									</Typography>
 								</ListItemText>
-								<ListItemText inset>
-									<Typography color = "inherit" variant = "h6">
-										<Link to = "/reimb/status/change" className = {classes.link}>Approve or Deny Reimbursement</Link>
-									</Typography>
-								</ListItemText>
 								
 								
-
 								<ListItemText inset>
                                     <Typography color = "inherit" variant = "h6">
                                         <Link to = '' onClick = {logout} className = {classes.link}>Logout</Link>

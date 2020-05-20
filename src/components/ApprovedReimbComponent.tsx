@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react'; 
 import {Reimbursements} from '../models/reimbs';
-import {approvedReimb} from '../remote/reimb-service';
+import {approvedReimb, getReimbByReimbID} from '../remote/reimb-service';
 import { Users } from '../models/users';
+import { Link } from 'react-router-dom';
+
 
 
 interface IReimbProp{
-	allReimb: Reimbursements;
 	authUser: Users;
+	setThisReimb: (reimb: Reimbursements) => void;
 }
 
 const ApprovedReimbComponent = (props: IReimbProp) =>{
@@ -30,6 +32,12 @@ const ApprovedReimbComponent = (props: IReimbProp) =>{
 						<td>{reimb.resolver_id}</td>
 						<td>{reimb.reimb_status}</td>
 						<td>{reimb.reimb_type}</td>
+						<td><Link to = {`/details-${reimb.reimb_id}`} onClick = {
+                                async () => {
+									const response = await getReimbByReimbID(reimb.reimb_id);
+                                    props.setThisReimb(response);
+                                }
+                            }>Details</Link></td>
 					</tr>
 				)
 			}
