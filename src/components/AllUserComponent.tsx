@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react'; 
 import {Users} from '../models/users';
-import {getUsers} from '../remote/user-service';
+import {getUsers, deleteUser} from '../remote/user-service';
 import { Link } from 'react-router-dom';
+
 
 interface IUserProp{
 	authUser: Users;
-	setNewUser: (user: Users) => void;
+	setThisUser: (user: Users) => void;
 }
 
 
@@ -35,11 +36,13 @@ const UserComponent = (props: IUserProp) =>{
 							:
 							<td>Employee</td>
 						}
-						<td><Link to={'/user/update'} onClick={ () => {
-                            props.setNewUser({...user})}}>edit</Link>
+						<td><Link to={'/user/update'} onClick={ () => {props.setThisUser(new Users(user.id, user.username, user.password, user.firstName, user.lastName, user.email, user.roleId))}}>edit</Link>
                         </td>
-                        <td><Link to={'/users/delete'} onClick={ () => {
-                            props.setNewUser({...user})}}>delete</Link>
+                        <td><Link to={'/users'} onClick={
+							async ()=>{
+								await deleteUser(user.ers_user_id)
+							}
+						}>delete</Link>
                         </td>
 					</tr>
 				)
@@ -47,7 +50,7 @@ const UserComponent = (props: IUserProp) =>{
 			setUsersState(users);
 		}
 		fetchData();
-	},[]);
+	},[users]);
 
 	return (
 		!props.authUser || (props.authUser.role_name !== 'admin') ?

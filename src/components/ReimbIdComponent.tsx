@@ -36,7 +36,7 @@ const ReimbIdComponent = (props: IReimbProp) =>{
 									props.setThisReimb(response);
                                 }
                             }>Details</Link></td>
-						<td><Link to = {'/reimb/update'}>Test</Link></td>
+						<td><Link to = {'/reimb/update'}>Update</Link></td>
 					</tr>
 				)
 			}
