@@ -31,14 +31,15 @@ function App(){
   //@ts-ignore
   const [newUser, setNewUser] = useState(null as Users);
   //@ts-ignore
-  const [updateUser, setUpdateUser] = useState(null as Users);
+  const [updateUser, setUpdateUser] = useState(new Users(0, '','', '', '', '',''));
+  const [updateThisUser, setThisUser] = useState(new Users(0, '','', '', '', '',''));
+
   //@ts-ignore
   const [newReimb, setNewReimb] = useState(null as Reimbursements);
   //@ts-ignore
   const [deleteUser, setDeleteUser] = useState(null as Users)
   const [thisReimb, setThisReimb] = useState(new Reimbursements(0,0,'','','',0,0,'',''));
   
-
   return (
     <>
       <Router>
@@ -56,11 +57,9 @@ function App(){
           <Route path="/home" render = {() => <HomeComponent authUser = {authUser}/>}/>
           <Route path="/login" render={() => <LoginComponent authUser={authUser} setAuthUser={setAuthUser} />} />
           <Route path = "/register" render = {() =><RegisterComponent newUser = {newUser} setNewUser = {setNewUser}/>}/>
-          <Route exact path = "/users" render = {() => <UserComponent authUser = {authUser} setNewUser = {setNewUser}/>}/>
-
-
+          <Route exact path = "/users" render = {() => <UserComponent authUser = {authUser} setThisUser = {setThisUser}/>}/>
           <Route exact path = "/users/delete" render = {() => <DeleteComponent authUser = {authUser} setDeleteUser = {setDeleteUser}/>}/>
-          <Route path = "/user/update" render = {() =><UpdateUserComponent updateUser = {updateUser} setUpdateUser = {setUpdateUser}/>}/>
+          <Route path = "/user/update" render = {() =><UpdateUserComponent updateUser = {updateUser} authUser = {authUser}/>}/>
           <Route path = "/reimb/all" render = {() => <AllReimbComponent authUser = {authUser} setThisReimb = {setThisReimb}  />}/>
           <Route path = "/reimb/id" render = {() => <ReimbIdComponent authUser = {authUser} setThisReimb = {setThisReimb}  />}/>
           <Route path = "/reimb/status/pending" render = {() => <PendingReimbComponent authUser = {authUser}  setThisReimb = {setThisReimb}/>}/>
