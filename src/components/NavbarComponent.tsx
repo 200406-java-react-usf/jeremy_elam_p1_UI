@@ -105,23 +105,6 @@ const NavBarComponent = (props: INavbarProps)=>{
 								</ListItemText>
 								
 								<ListItemText inset>
-									<Typography color = "inherit" variant = "h6">
-										<Link to = "/reimb/status/approved" className = {classes.link}>Approved Reimbursements</Link>
-									</Typography>
-								</ListItemText>
-								<ListItemText inset>
-									<Typography color = "inherit" variant = "h6">
-										<Link to = "/reimb/status/denied" className = {classes.link}>Denied Reimbursements</Link>
-									</Typography>
-								</ListItemText>
-								<ListItemText inset>
-									<Typography color = "inherit" variant = "h6">
-										<Link to = "/reimb/status/pending" className = {classes.link}>Pending Reimbursements</Link>
-									</Typography>
-								</ListItemText>
-								
-								
-								<ListItemText inset>
                                     <Typography color = "inherit" variant = "h6">
                                         <Link to = '' onClick = {logout} className = {classes.link}>Logout</Link>
                                     </Typography>
