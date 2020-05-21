@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, SyntheticEvent} from 'react';
 import {Alert} from '@material-ui/lab';
 import { 
     Typography, 
@@ -11,10 +11,11 @@ import {
 
 import {Users} from '../models/users';
 import {updateUser} from '../remote/user-service';
+import { projectOneClient } from '../remote/projectOne-client';
 
 interface IUpdateProps{
+	authUser: Users;
 	updateUser: Users;
-	setUpdateUser: (users: Users) => void;
 }
 
 const useStyles = makeStyles({
@@ -33,13 +34,13 @@ const useStyles = makeStyles({
 function UpdateUserComponent(props: IUpdateProps){
 	const classes = useStyles();
 
-	const [id, setId] = useState(NaN);
-	const [username, setUsername] = useState('');
-	const [password, setPassword] = useState('');
-	const [first_name, setFirstName] = useState('');
-	const [last_name, setLastName] = useState('');
-	const [email, setEmail] = useState('');
-	const [role_name, setRoleName] = useState('');
+	const [id, setId] = useState(props.updateUser.ers_user_id);
+	const [username, setUsername] = useState(props.updateUser.username);
+	const [password, setPassword] = useState(props.updateUser.password);
+	const [first_name, setFirstName] = useState(props.updateUser.first_name);
+	const [last_name, setLastName] = useState(props.updateUser.last_name);
+	const [email, setEmail] = useState(props.updateUser.email);
+	const [role_name, setRoleName] = useState(props.updateUser.role_name);
 	const [errorMessage, setErrorMessage] = useState('');
 
 	let newId = (e: any) =>{
@@ -64,12 +65,16 @@ function UpdateUserComponent(props: IUpdateProps){
 		setRoleName(e.currentTarget.value);
 	}
 
-	let update = async ()=>{
-		if(id === NaN || role_name === '' || username === '' || password === '' || first_name === '' || last_name === '' || email === ''){
-			setErrorMessage('All areas must be filled in.')
-		}
-		let updatedUser = await updateUser(id, username, password, first_name, last_name, email, role_name);
-		props.setUpdateUser(updatedUser);
+	let update = (e: SyntheticEvent) =>{
+		projectOneClient.put('/users',{
+			ers_user_id: id,
+			username: username,
+			password: password,
+			first_name: first_name,
+			last_name: last_name,
+			email: email,
+			role_name: role_name
+		})
 	}
 
 	return (
