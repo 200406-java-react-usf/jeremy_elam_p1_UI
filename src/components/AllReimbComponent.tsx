@@ -33,14 +33,11 @@ const AllReimbComponent = (props: IReimbProp) =>{
 					reimbs.push(
 						<tr>
 							<td>{reimb.reimb_id}</td>
+							<td>{reimb.author_id}</td>
 							<td>{reimb.amount}</td>
 							<td>{reimb.submitted}</td>
-							<td>{reimb.resolved}</td>
-							<td>{reimb.description}</td>
-							<td>{reimb.author_id}</td>
-							<td>{reimb.resolver_id}</td>
-							<td>{reimb.reimb_status}</td>
 							<td>{reimb.reimb_type}</td>
+							<td>{reimb.reimb_status}</td>
 							{
 								reimb.reimbStatusId === 'pending' ?
 									<td>Pending</td>
@@ -92,14 +89,11 @@ const AllReimbComponent = (props: IReimbProp) =>{
 				<thead>
 					<tr>
 						<th>Reimbursement ID</th>
+						<th>Author Id</th>
 						<th>Amount</th>
 						<th>Submitted</th>
-						<th>Resolved</th>
-						<th>Description</th>
-						<th>Author Id</th>
-						<th>Resolver Id</th>
-						<th>Reimbursement Status</th>
 						<th>Reimbursement Type</th>
+						<th>Reimbursement Status</th>
 						<select value = {reimbStatus} onChange = {updateStatus}>
                             <option value = {'all'}>All</option>
                             <option value = {"pending"}>Pending</option>

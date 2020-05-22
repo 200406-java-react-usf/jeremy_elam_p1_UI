@@ -13,7 +13,8 @@ import {
 import { Users} from '../models/users';
 import {registerUser} from '../remote/register-service';
 
-interface IRegisterProps{
+export interface IRegisterProps{
+	authUser: Users
 	newUser: Users;
 	setNewUser: (user: Users) => void;
 }
@@ -63,12 +64,22 @@ function RegisterComponent(props: IRegisterProps){
 	let register = async () =>{
 		if(role_name === ''|| username === '' || password === '' || first_name === '' || last_name === '' || email === ''){
 			setErrorMessage('All areas must be filled in.')
+		} else{
+			try{
+			let newUser = await registerUser(first_name, last_name, username, email, password, role_name);
+			props.setNewUser(newUser);
+			}catch(e){
+				setErrorMessage('Duplicate Information Found. Please Try Again!!!!')
+			}
 		}
-		let newUser = await registerUser(first_name, last_name, username, email, password, role_name);
-		props.setNewUser(newUser);
 	}
 
 	return (
+		!props.authUser || (props.authUser.role_name !== 'admin') ?
+		<>
+			<h1>You're not authorized to view this page</h1>
+		</>
+		:
 		<>
 			<div className = {classes.registerContainer}>
 				<form className = {classes.registerForm}>

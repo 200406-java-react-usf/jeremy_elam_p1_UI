@@ -16,6 +16,7 @@ import { projectOneClient } from '../remote/projectOne-client';
 interface IUpdateProps{
 	authUser: Users;
 	updateUser: Users;
+	setUpdateUser: (users: Users) => void;
 }
 
 const useStyles = makeStyles({
@@ -65,19 +66,24 @@ function UpdateUserComponent(props: IUpdateProps){
 		setRoleName(e.currentTarget.value);
 	}
 
-	let update = (e: SyntheticEvent) =>{
-		projectOneClient.put('/users',{
-			ers_user_id: id,
-			username: username,
-			password: password,
-			first_name: first_name,
-			last_name: last_name,
-			email: email,
-			role_name: role_name
-		})
+	let update = async ()=>{
+		if(id === NaN || role_name === '' || username === '' || password === '' || first_name === '' || last_name === '' || email === ''){
+			setErrorMessage('All areas must be filled in.')
+		}
+		try{
+		let updatedUser = await updateUser(id, username, password, first_name, last_name, email, role_name);
+		props.setUpdateUser(updatedUser);
+		}catch(e){
+			setErrorMessage("Bad Request. Duplicate Information Found")
+		}
 	}
 
 	return (
+		!props.authUser || (props.authUser.role_name !== 'admin') ?
+		<>
+			<h1>You're not authorized to view this page</h1>
+		</>
+		:
 		<>
 			<div className = {classes.registerContainer}>
 				<form className = {classes.updateForm}>
