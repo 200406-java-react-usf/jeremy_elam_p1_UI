@@ -22,14 +22,9 @@ const HomeComponent = (props: IHomeProps) =>{
 			<br/>
 			<h1>Welcome, {props.authUser.username}! </h1>
 			<h2>User ID: {props.authUser.ers_user_id}</h2>
-			
+			<h2>User ID: {props.authUser.role_name}</h2>
 
-			<br/>
-			<Button onClick = {getUsers} variant = "contained" color = "primary" size = "medium">Get All Users</Button>
-			<br/>
-			<Button onClick = {logout} variant = "contained" color = "primary" size = "medium"> Logout</Button>
-			<br/>
-			<Button onClick = {pendingReimb} variant = "contained" color = "secondary" size = "small"> Get All Reimb Stuff</Button>
+			
 		</>
 	)
 }
