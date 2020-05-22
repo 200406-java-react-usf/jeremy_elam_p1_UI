@@ -22,14 +22,14 @@ const ReimbIdComponent = (props: IReimbProp) =>{
 				reimbs.push(
 					<tr key = {reimb.reimb_id}>
 						<td>{reimb.reimb_id}</td>
-						<td>{reimb.amount}</td>
+						<br></br>
+						<td>${reimb.amount}</td>
+						<br></br>
 						<td>{reimb.submitted}</td>
-						<td>{reimb.resolved}</td>
-						<td>{reimb.description}</td>
-						<td>{reimb.author_id}</td>
-						<td>{reimb.resolver_id}</td>
-						<td>{reimb.reimb_status}</td>
+						<br></br>
 						<td>{reimb.reimb_type}</td>
+						<br></br>
+						<td>{reimb.reimb_status}</td>
 						<td><Link to = {`/details-${reimb.reimb_id}`} onClick = {
                                 async () => {
 									const response = await getReimbByReimbID(reimb.reimb_id);
@@ -49,23 +49,21 @@ const ReimbIdComponent = (props: IReimbProp) =>{
 		<>
 			<h1>You're not authorized to view this page</h1>
 		</>
-
 		:
-
 		<>
 			<h1>Reimbursement Component</h1>
 			<table>
 				<thead>
 					<tr>
 						<th>Reimbursement ID</th>
+						<br></br>
 						<th>Amount</th>
+						<br></br>
 						<th>Submitted</th>
-						<th>Resolved</th>
-						<th>Description</th>
-						<th>Author Id</th>
-						<th>Resolver Id</th>
-						<th>Reimbursement Status</th>
+						<br></br>
 						<th>Reimbursement Type</th>
+						<br></br>
+						<th>Reimbursement Status</th>
 					</tr>
 				</thead>
 				<tbody>
