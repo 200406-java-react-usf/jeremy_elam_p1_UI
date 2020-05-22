@@ -7,7 +7,7 @@ import { projectOneClient } from '../remote/projectOne-client';
 
 
 
-interface IReimbDetailsProps{
+export interface IReimbDetailsProps{
     authUser: Users;
     thisReimb: Reimbursements;
 }

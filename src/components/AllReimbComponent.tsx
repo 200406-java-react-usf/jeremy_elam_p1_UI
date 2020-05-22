@@ -5,7 +5,7 @@ import { Users } from '../models/users';
 import { Link } from 'react-router-dom';
 
 
-interface IReimbProp{
+export interface IReimbProp{
 	authUser: Users;
 	setThisReimb: (reimb: Reimbursements) => void
 }

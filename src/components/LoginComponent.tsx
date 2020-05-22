@@ -14,7 +14,7 @@ import { authenticate } from '../remote/auth-service';
 import { Users } from '../models/users';
 import { Redirect } from 'react-router-dom';
 
-interface ILoginProps{
+export interface ILoginProps{
 	authUser: Users;
 	setAuthUser: (user: Users) => void;
 }

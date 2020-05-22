@@ -15,7 +15,7 @@ import { Users } from '../models/users';
 import { updateReimb } from '../remote/reimb-service';
 
 
-interface ILoginProps{
+export interface ILoginProps{
 	authUser: Users;
 	setNewReimb: (reimb: Reimbursements) => void;
 }
