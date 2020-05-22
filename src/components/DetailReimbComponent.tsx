@@ -52,13 +52,13 @@ function ReimbDetailsComponent(props: IReimbDetailsProps){
                 <tr><td>{props.thisReimb.resolver_id}</td></tr>
                 <tr><td>Status:</td></tr>
                 {
-                    props.thisReimb.reimb_status === 'approved' ?
+                    props.thisReimb.reimb_status === 'pending' ?
                         <tr><td>Pending</td></tr>
                     :
                     props.thisReimb.reimb_status === 'denied'?
                         <tr><td>Denied</td></tr>
                     :
-                    props.thisReimb.reimb_status === 'pending' ?
+                    props.thisReimb.reimb_status === 'approved' ?
                         <tr><td>Approved</td></tr>
                     :
                         <tr><td>Unknown</td></tr>
