@@ -67,6 +67,12 @@ const NavBarComponent = (props: INavbarProps)=>{
 							<>
 								<ListItemText inset>
 									<Typography color = "inherit" variant = "h6">
+										{props.authUser.username}
+									</Typography>
+								</ListItemText>
+
+								<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
 										<Link to = "/home" className = {classes.link}>Home</Link>
 									</Typography>
 								</ListItemText>
@@ -94,6 +100,12 @@ const NavBarComponent = (props: INavbarProps)=>{
 							<>
 								<ListItemText inset>
 									<Typography color = "inherit" variant = "h6">
+										{props.authUser.username}
+									</Typography>
+								</ListItemText>
+
+								<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
 										<Link to = "/home" className = {classes.link}>Home</Link>
 									</Typography>
 								</ListItemText>
@@ -112,6 +124,12 @@ const NavBarComponent = (props: INavbarProps)=>{
 							</>
 							:
 							<>
+							<ListItemText inset>
+									<Typography color = "inherit" variant = "h6">
+										{props.authUser.username}
+									</Typography>
+							</ListItemText>
+							
 							<ListItemText inset>
 									<Typography color = "inherit" variant = "h6">
 										<Link to = "/home" className = {classes.link}>Home</Link>
