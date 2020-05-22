@@ -7,13 +7,13 @@ import {logout} from '../remote/auth-service';
 import { Users } from '../models/users';
 import UserComponent from './AllUserComponent'
 
-interface IHomeProps{
+export interface IHomeProps{
 	authUser: Users;
 }
 
 
 
-const HomeComponent = (props: IHomeProps) =>{
+export const HomeComponent = (props: IHomeProps) =>{
 	return (
 		!props.authUser ?
 		<Redirect to = "/login" /> :
