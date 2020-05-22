@@ -57,13 +57,23 @@ function UpdateRimbComponent(props: ILoginProps){
 	let update = async ()=>{
 		if(reimb_id === NaN || amount === NaN || description === '' || reimb_type === ''){
 			setErrorMessage('All areas must be filled in.')
+		}else{
+		try{
+			let updatedUser = await updateReimb(reimb_id, amount, description, reimb_type);
+			props.setNewReimb(updatedUser);
+			} catch(e){
+				setErrorMessage("Only Pending Reimbursements can be updated!!!!!")
+			}
 		}
-
-		let updatedUser = await updateReimb(reimb_id, amount, description, reimb_type);
-		props.setNewReimb(updatedUser);
 	}
 
 	return (
+		!props.authUser || (props.authUser.role_name !== 'employee') ?
+		<>
+			<h1>You're not authorized to view this page</h1>
+		</>
+
+		:
 		<>
 			<div className = {classes.loginContainer}>
 				<form className = {classes.loginForm}>
