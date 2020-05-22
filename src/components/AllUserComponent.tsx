@@ -4,7 +4,7 @@ import {getUsers, deleteUser} from '../remote/user-service';
 import { Link } from 'react-router-dom';
 
 
-interface IUserProp{
+export interface IUserProp{
 	authUser: Users;
 	setThisUser: (user: Users) => void;
 }

@@ -13,7 +13,7 @@ import {Users} from '../models/users';
 import {updateUser} from '../remote/user-service';
 import { projectOneClient } from '../remote/projectOne-client';
 
-interface IUpdateProps{
+export interface IUpdateProps{
 	authUser: Users;
 	updateUser: Users;
 	setUpdateUser: (users: Users) => void;

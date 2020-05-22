@@ -15,7 +15,7 @@ import {Reimbursements} from '../models/reimbs';
 import {newReimb} from '../remote/reimb-service';
 import { Users } from '../models/users';
 
-interface IReimbProps{
+export interface IReimbProps{
 	authUser: Users;
 	newReimb: Reimbursements;
 	setNewReimb: (reimb: Reimbursements) => void;
